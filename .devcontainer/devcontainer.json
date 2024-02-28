@@ -1,0 +1,19 @@
+{
+    "name": "REDIS_CLUSTER_SAMPLE_APP",
+    "dockerComposeFile": "docker-compose.yml",
+    "workspaceFolder": "/app",
+    "service": "app",
+    "customizations": {
+        "vscode": {
+          "settings": {},
+          "extensions": [
+            "ms-python.python",
+            "eamodio.gitlens",
+            "GitHub.copilot",
+            "42crunch.vscode-openapi"
+          ]
+        }
+    },
+    "overrideCommand": true,
+    "postCreateCommand": "pip install -r requirements.txt"
+}

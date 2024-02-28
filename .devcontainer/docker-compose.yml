@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: redis_cluster_sample_app
+    build: .
+    restart: always
+    env_file:
+      - .env.local
+    volumes:
+      - ..:/app
+    depends_on:
+      - redis1
+      - redis2
+      - redis3
+    networks:
+      - redis_cluster_sample_app_net
+  redis1:
+    image: redis:latest
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes
+    networks:
+      - redis_cluster_sample_app_net
+  redis2:
+    image: redis:latest
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes
+    networks:
+      - redis_cluster_sample_app_net
+  redis3:
+    image: redis:latest
+    command: redis-server --port 6379 --cluster-enabled yes --cluster-config-file nodes.conf --cluster-node-timeout 5000 --appendonly yes
+    networks:
+      - redis_cluster_sample_app_net
+networks:
+  redis_cluster_sample_app_net:
+    driver: bridge
+
